@@ -1,147 +1,260 @@
 <section class="filter-bar" id="filterBar">
   <div class="filter-bar__head">
     <button type="button" class="filter-bar__toggle" (click)="handleToggle()">
-      <i class="bi bi-funnel-fill"></i> <span>Filters</span>
-      <span class="filter-bar__count" style="display: none">0</span>
-      <i [classList]="isOpen ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
+      <i class="bi bi-funnel-fill"></i>
+
+      <span>Filters</span>
+
+      @if (totalSelectedCount > 0) {
+        <span class="filter-bar__count">
+          {{ totalSelectedCount }}
+        </span>
+      }
+
+      <i [class]="isOpen ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
     </button>
-    <span [class]="isOpen ? 'filter-bar__hint' : 'filter-bar__hint--active'" id="filterHint"
-      >No filters applied</span
-    >
+
+    <span [class]="isOpen ? 'filter-bar__hint' : 'filter-bar__hint--active'" id="filterHint">
+      {{ totalSelectedCount > 0 ? totalSelectedCount + ' filters applied' : 'No filters applied' }}
+    </span>
   </div>
+
   @if (isOpen) {
     <div class="filter-bar__body" id="filterBarBody">
       <div class="filter-bar__rows">
+        <!-- ROW 1 -->
         <div class="filter-bar__row">
+          <!-- Scope -->
           <div class="filter-bar__scope">
             <label>Scope</label>
+
             <div class="seg" role="radiogroup" aria-label="Scope">
-              <label class="seg__item"
-                ><input type="radio" name="mode" value="all" checked (change)="onModeChange($event)" /> All</label
-              >
-              <label class="seg__item"
-                ><input type="radio" name="mode" value="critical" (change)="onModeChange($event)" /> Critical</label
-              >
-              <label class="seg__item"
-                ><input type="radio" name="mode" value="pragati" (change)="onModeChange($event)" /> Pragati</label
-              >
+              <label class="seg__item">
+                <input type="radio" name="mode" value="all" checked />
+                All
+              </label>
+
+              <label class="seg__item">
+                <input type="radio" name="mode" value="critical" />
+                Critical
+              </label>
+
+              <label class="seg__item">
+                <input type="radio" name="mode" value="pragati" />
+                Pragati
+              </label>
             </div>
           </div>
+
+          <!-- Sector -->
           <div class="filter-bar__field">
             <label>Sector</label>
+
             <div id="ms_sector">
               <app-multiselect
                 [options]="sectorList"
+                [selectedItems]="filterState.sectors"
                 placeholder="All sectors"
-                (selectionChange)="onSectorChange($event)"
-              ></app-multiselect>
+                (selectionChange)="updateFilter('sectors', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- Department -->
           <div class="filter-bar__field">
             <label>Department / Ministry</label>
+
             <div id="ms_department">
               <app-multiselect
-                [options]="sectorList"
+                [options]="departmentList"
+                [selectedItems]="filterState.departments"
                 placeholder="All departments"
-                (selectionChange)="onDepartmentChange($event)"
-              ></app-multiselect>
+                (selectionChange)="updateFilter('departments', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- State -->
           <div class="filter-bar__field">
             <label>State</label>
+
             <div id="ms_state">
               <app-multiselect
-                [options]="sectorList"
+                [options]="stateList"
+                [selectedItems]="filterState.states"
                 placeholder="All states"
-                (selectionChange)="onStateChange($event)"
-              ></app-multiselect>
+                (selectionChange)="updateFilter('states', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- District -->
           <div class="filter-bar__field">
             <label>District</label>
+
             <div id="ms_district">
               <app-multiselect
-                [options]="sectorList"
+                [options]="districtList"
+                [selectedItems]="filterState.districts"
                 placeholder="All districts"
-                (selectionChange)="onDistrictChange($event)"
-              ></app-multiselect>
+                (selectionChange)="updateFilter('districts', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- Search -->
           <div class="filter-bar__field search">
             <label>Search</label>
+
             <div class="filter-search">
               <i class="bi bi-search"></i>
+
               <input
                 type="text"
                 id="fSearch"
-                placeholder="Search scheme, KPI, project, code…"
+                placeholder="Search scheme, KPI, project, code..."
                 aria-label="Search records"
+                [(ngModel)]="filterState.search"
+                (ngModelChange)="onSearchChange($event)"
               />
-              <button type="button" class="fs-clear" aria-label="Clear search">
+
+              <button type="button" class="fs-clear" aria-label="Clear search" (click)="onSearchChange('')">
                 <i class="bi bi-x-circle-fill"></i>
               </button>
             </div>
           </div>
         </div>
+
+        <!-- ROW 2 -->
         <div class="filter-bar__row">
+          <!-- Scheme -->
           <div class="filter-bar__field">
             <label>Scheme</label>
+
             <div id="ms_scheme">
               <app-multiselect
-                [options]="sectorList"
-                placeholder="All districts"
-                (selectionChange)="onSchemeChange($event)"
-              ></app-multiselect>
+                [options]="schemeList"
+                [selectedItems]="filterState.schemes"
+                placeholder="All schemes"
+                (selectionChange)="updateFilter('schemes', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- KPI -->
           <div class="filter-bar__field">
             <label>KPI</label>
+
             <div id="ms_kpi">
               <app-multiselect
-                [options]="sectorList"
-                placeholder="All districts"
-                (selectionChange)="onKPIChange($event)"
-              ></app-multiselect>
+                [options]="kpiList"
+                [selectedItems]="filterState.kpis"
+                placeholder="All KPIs"
+                (selectionChange)="updateFilter('kpis', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- Frequency -->
           <div class="filter-bar__field">
             <label>Data Frequency</label>
+
             <div id="ms_frequency">
               <app-multiselect
-                [options]="sectorList"
-                placeholder="All districts"
-                (selectionChange)="onDataFrequencyChange($event)"
-              ></app-multiselect>
+                [options]="frequencyList"
+                [selectedItems]="filterState.frequencies"
+                placeholder="All frequencies"
+                (selectionChange)="updateFilter('frequencies', $event)"
+              >
+              </app-multiselect>
             </div>
           </div>
+
+          <!-- Dates -->
           <div class="filter-bar__field dates">
-            <label>Date range (From → To)</label>
+            <label> Date range (From → To) </label>
+
             <div class="filter-bar__dates">
               <input
                 type="date"
-                id="fFrom"
                 class="form-control form-control-sm"
                 aria-label="From date"
+                [(ngModel)]="filterState.fromDate"
+                (ngModelChange)="onFromDateChange($event)"
               />
+
               <input
                 type="date"
-                id="fTo"
                 class="form-control form-control-sm"
                 aria-label="To date"
+                [(ngModel)]="filterState.toDate"
+                (ngModelChange)="onToDateChange($event)"
               />
             </div>
           </div>
+
+          <!-- Actions -->
           <div class="filter-bar__actions">
-            <button class="btn-soft" type="button" id="btnResetFilters">
-              <i class="bi bi-arrow-counterclockwise"></i> Reset
+            <button class="btn-soft" type="button" (click)="clearAllFilters()">
+              <i class="bi bi-arrow-counterclockwise"></i>
+              Reset
             </button>
-            <button class="btn-apply" type="button" id="btnApply">
-              <span class="dot-dirty"></span><i class="bi bi-funnel-fill"></i> Apply
+
+            <button class="btn-apply" type="button" (click)="applyFilters()">
+              <span class="dot-dirty"></span>
+              <i class="bi bi-funnel-fill"></i>
+              Apply
             </button>
           </div>
         </div>
       </div>
-      <div class="filter-bar__active" id="activeChips"></div>
+
+      <!-- ACTIVE FILTER CHIPS -->
+      <div class="filter-bar__active" id="activeChips">
+        @if (activeChips.length > 0) {
+          <span class="ttl"> Active Filters </span>
+
+          @for (chip of displayedChips; track chip.group + '-' + chip.value) {
+            <span class="chip" (click)="removeChip(chip.group, chip.value)">
+              {{ chip.label }}
+
+              <i class="bi bi-x"></i>
+            </span>
+          }
+
+          @if (activeChips.length > chipLimit) {
+            @if (chipsExpanded) {
+              <span class="chip chip--more" (click)="toggleChips(false)">
+                Show Less
+
+                <i class="bi bi-chevron-up"></i>
+              </span>
+            } @else {
+              <span class="chip chip--more" (click)="toggleChips(true)">
+                Read More (+{{ activeChips.length - chipLimit }})
+
+                <i class="bi bi-chevron-down"></i>
+              </span>
+            }
+          }
+
+          <span
+            class="chip"
+            (click)="clearAllFilters()"
+            style="background: var(--c-danger-tint); color: var(--c-danger)"
+          >
+            Clear All
+
+            <i class="bi bi-x-circle"></i>
+          </span>
+        }
+      </div>
     </div>
   }
 </section>

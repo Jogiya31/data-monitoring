@@ -15,47 +15,8 @@ import { FooterComponent } from './footer/footer';
 export class ShellComponent {
   currentYear = new Date().getFullYear();
 
-  selectedSectors: any[] = [];
-  selectedDepartments: any[] = [];
-  selectedStates: any[] = [];
-  selectedDistricts: any[] = [];
-  selectedSchemes: any[] = [];
-  selectedKPIs: any[] = [];
-  selectedDataFrequencies: any[] = [];
-
-  onSectorChange(items: any[]) {
-    this.selectedSectors = items;
-    console.log(items);
-  }
-
-  onDepartmentChange(items: any[]) {
-    this.selectedDepartments = items;
-    console.log(items);
-  }
-
-  onStateChange(items: any[]) {
-    this.selectedStates = items;
-    console.log(items);
-  }
-
-  onDistrictChange(items: any[]) {
-    this.selectedDistricts = items;
-    console.log(items);
-  }
-
-  onSchemeChange(items: any[]) {
-    this.selectedSchemes = items;
-    console.log(items);
-  }
-
-  onKPIChange(items: any[]) {
-    this.selectedKPIs = items;
-    console.log(items);
-  }
-
-  onDataFrequencyChange(items: any[]) {
-    this.selectedDataFrequencies = items;
-    console.log(items);
+  selectedFiltersChange(filterState: any) {
+    console.log('Received filter state in ShellComponent:', filterState);
   }
 
 }

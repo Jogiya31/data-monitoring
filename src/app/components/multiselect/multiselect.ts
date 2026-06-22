@@ -19,14 +19,15 @@ export class MultiselectComponent {
 
   @Input() options: SelectOption[] = [];
 
+  // Parent controls selection
+  @Input() selectedItems: SelectOption[] = [];
+
   @Output() selectionChange = new EventEmitter<SelectOption[]>();
 
   searchText = '';
 
-  selectedItems: SelectOption[] = [];
-
   get filteredOptions(): SelectOption[] {
-    const search = this.searchText?.trim().toLowerCase();
+    const search = this.searchText.trim().toLowerCase();
 
     if (!search) {
       return this.options;
@@ -36,7 +37,7 @@ export class MultiselectComponent {
   }
 
   get displayText(): string {
-    if (this.selectedItems.length === 0) {
+    if (!this.selectedItems.length) {
       return this.placeholder;
     }
 
@@ -47,16 +48,18 @@ export class MultiselectComponent {
     return `${this.selectedItems.length} Selected`;
   }
 
+  get selectedCount(): number {
+    return this.selectedItems.length;
+  }
+
   toggleSelection(item: SelectOption): void {
-    const index = this.selectedItems.findIndex((selected) => selected.value === item.value);
+    const exists = this.selectedItems.some((selected) => selected.value === item.value);
 
-    if (index > -1) {
-      this.selectedItems.splice(index, 1);
-    } else {
-      this.selectedItems.push(item);
-    }
+    const updated = exists
+      ? this.selectedItems.filter((selected) => selected.value !== item.value)
+      : [...this.selectedItems, item];
 
-    this.selectionChange.emit([...this.selectedItems]);
+    this.selectionChange.emit(updated);
   }
 
   isSelected(item: SelectOption): boolean {
@@ -66,17 +69,18 @@ export class MultiselectComponent {
   selectAll(): void {
     const selectedValues = new Set(this.selectedItems.map((item) => item.value));
 
+    const updated = [...this.selectedItems];
+
     this.filteredOptions.forEach((item) => {
       if (!selectedValues.has(item.value)) {
-        this.selectedItems.push(item);
+        updated.push(item);
       }
     });
 
-    this.selectionChange.emit([...this.selectedItems]);
+    this.selectionChange.emit(updated);
   }
 
   clearAll(): void {
-    this.selectedItems = [];
     this.selectionChange.emit([]);
   }
 }
