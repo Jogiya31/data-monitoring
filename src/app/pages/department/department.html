@@ -1,0 +1,51 @@
+<div class="content">
+  <div class="page-head">
+    <div class="page-head__row">
+      <div>
+        <h1>Department Wise Delay Report</h1>
+        <p id="deptSubtitle">Delay rates and average delay across departments and ministries.</p>
+      </div>
+      <div class="pill-row" id="deptDrillReset" style="display:none">
+        <button class="btn-soft" type="button" id="btnClearDept"><i class="bi bi-x-circle"></i> Clear department</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section"><div class="kpi-grid" id="deptKpis"></div></section>
+
+  <section class="grid-2-1 section">
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-building"></i> Department analysis</h2><span class="sub">Click a row to focus</span></div>
+      <div class="section__body table-scroll"><table id="deptTable" class="display nowrap" style="width:100%"></table></div>
+    </div>
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-pie-chart"></i> Grace split</h2></div>
+      <div class="section__body"><div id="deptGrace" class="chart-box sm"></div></div>
+    </div>
+  </section>
+
+  <section class="grid-2 section">
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-bar-chart-steps"></i> Frequency wise delay</h2></div>
+      <div class="section__body"><div id="deptFreq" class="chart-box"></div></div>
+    </div>
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-grid-3x3-gap"></i> Scheme grid</h2><span class="sub" id="schemeCount"></span></div>
+      <div class="section__body table-scroll" style="max-height:340px;overflow:auto"><div id="schemeGrid" class="rank-list"></div></div>
+    </div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-list-ul"></i> Detailed schemes</h2></div>
+    <div class="section__body table-scroll"><table id="deptDetail" class="display nowrap" style="width:100%"></table></div>
+  </section>
+
+  <section class="grid-2 section">
+    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-trophy"></i> Top performers</h2></div><div class="section__body"><div id="dPerf" class="rank-list"></div></div></div>
+    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-exclamation-octagon"></i> Top defaulters</h2></div><div class="section__body"><div id="dDef" class="rank-list"></div></div></div>
+  </section>
+  <section class="grid-2 section">
+    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-graph-up-arrow"></i> Consecutive performers</h2></div><div class="section__body"><div id="dCPerf" class="rank-list"></div></div></div>
+    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-graph-down-arrow"></i> Consecutive defaulters</h2></div><div class="section__body"><div id="dCDef" class="rank-list"></div></div></div>
+  </section>
+</div>

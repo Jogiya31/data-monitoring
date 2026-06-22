@@ -1,0 +1,54 @@
+<div class="content" style="grid-column: 1 / -1;">
+  <section class="hero section">
+    <h1>PRAYAS Data Monitoring Dashboard</h1>
+    <p>Track scheme data-submission delays, surface KPI anomalies, and compare current frequencies against historical performance — across ministries, departments, states and districts.</p>
+  </section>
+
+  <section class="section">
+    <div class="kpi-grid" id="overviewKpis"></div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head">
+      <h2><i class="bi bi-table"></i> Complete dataset</h2>
+      <span class="sub" id="allDataCount"></span>
+    </div>
+    <div class="section__body table-scroll">
+      <table id="allDataTable" class="display nowrap" style="width:100%"></table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head" style="border:none;padding-left:0">
+      <h2><i class="bi bi-grid-1x2"></i> Modules</h2>
+      <span class="sub">Filters apply across every module</span>
+    </div>
+    <div class="module-grid" id="moduleGrid">
+      <a class="module-card card-surface" routerLink="/delay">
+        <div class="m-icon"><i class="bi bi-clock-history"></i></div>
+        <h3>Data Delay Dashboard</h3>
+        <p>Critical schemes, defaulters, grace-period tracking and delay analysis.</p>
+      </a>
+      <a class="module-card card-surface" routerLink="/department">
+        <div class="m-icon"><i class="bi bi-building"></i></div>
+        <h3>Department Wise Delay Report</h3>
+        <p>Delay rates and average delay by department and ministry.</p>
+      </a>
+      <a class="module-card card-surface" routerLink="/anomaly">
+        <div class="m-icon"><i class="bi bi-activity"></i></div>
+        <h3>Anomaly Analysis</h3>
+        <p>Zero, consecutive-zero, negative, dip and abnormal-spike detection.</p>
+      </a>
+      <a class="module-card card-surface" routerLink="/reports">
+        <div class="m-icon"><i class="bi bi-file-earmark-bar-graph"></i></div>
+        <h3>Reports Center</h3>
+        <p>17 ready reports with PDF, Excel, CSV and print export.</p>
+      </a>
+      <a class="module-card card-surface" routerLink="/alerts">
+        <div class="m-icon"><i class="bi bi-bell"></i></div>
+        <h3>Alerts Center</h3>
+        <p>Categorized alerts and scheduled executive summaries.</p>
+      </a>
+    </div>
+  </section>
+</div>

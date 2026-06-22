@@ -1,0 +1,118 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+
+  "cli": {
+    "packageManager": "npm"
+  },
+
+  "newProjectRoot": "projects",
+
+  "projects": {
+    "data-monitoring": {
+      "projectType": "application",
+
+      "root": "",
+
+      "sourceRoot": "src",
+
+      "prefix": "app",
+
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+
+          "options": {
+            "browser": "src/main.ts",
+
+            "tsConfig": "tsconfig.app.json",
+
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+
+            "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+
+              "node_modules/datatables.net-bs5/css/dataTables.bootstrap5.min.css",
+              "node_modules/datatables.net-buttons-bs5/css/buttons.bootstrap5.min.css",
+
+              "src/styles.css"
+            ],
+
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+
+              "node_modules/datatables.net/js/dataTables.min.js",
+              "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
+
+              "node_modules/datatables.net-buttons/js/dataTables.buttons.min.js",
+              "node_modules/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js",
+
+              "node_modules/jszip/dist/jszip.min.js",
+
+              "node_modules/pdfmake/build/pdfmake.min.js",
+              "node_modules/pdfmake/build/vfs_fonts.js",
+
+              "node_modules/datatables.net-buttons/js/buttons.html5.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.print.min.js",
+              "node_modules/datatables.net-buttons/js/buttons.colVis.min.js"
+            ]
+          },
+
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "2MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "10kB",
+                  "maximumError": "20kB"
+                }
+              ],
+
+              "outputHashing": "all"
+            },
+
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+
+          "defaultConfiguration": "production"
+        },
+
+        "serve": {
+          "builder": "@angular/build:dev-server",
+
+          "configurations": {
+            "production": {
+              "buildTarget": "data-monitoring:build:production"
+            },
+
+            "development": {
+              "buildTarget": "data-monitoring:build:development"
+            }
+          },
+
+          "defaultConfiguration": "development"
+        },
+
+        "test": {
+          "builder": "@angular/build:unit-test"
+        }
+      }
+    }
+  }
+}

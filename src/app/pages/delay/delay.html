@@ -1,0 +1,68 @@
+<div class="content">
+  <div class="page-head">
+    <div class="page-head__row">
+      <div>
+        <h1>Data Delay Dashboard</h1>
+        <p id="delaySubtitle">Submission delays, grace-period tracking and defaulter analysis.</p>
+      </div>
+      <div class="pill-row" id="drillReset" style="display:none">
+        <button class="btn-soft" type="button" id="btnClearDrill"><i class="bi bi-x-circle"></i> Clear drilldown</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="kpi-grid" id="kpiGrid"></div>
+  </section>
+
+  <section class="grid-2-1 section">
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-bar-chart"></i> Delay analysis by frequency</h2><span class="sub">Click a bar to filter</span></div>
+      <div class="section__body"><div id="chartDelay" class="chart-box"></div></div>
+    </div>
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-shield-check"></i> Grace period</h2></div>
+      <div class="section__body"><div id="chartGrace" class="chart-box sm"></div></div>
+    </div>
+  </section>
+
+  <section class="grid-2 section">
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-pie-chart"></i> Frequency distribution</h2><span class="sub">Click a slice to filter</span></div>
+      <div class="section__body"><div id="chartFreq" class="chart-box sm"></div></div>
+    </div>
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-table"></i> Frequency summary</h2></div>
+      <div class="section__body table-scroll"><table id="freqSummary" class="table table-sm" style="width:100%"></table></div>
+    </div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-list-ul"></i> Detailed delay analysis</h2><span class="sub" id="detailCount"></span></div>
+    <div class="section__body table-scroll">
+      <table id="detailTable" class="display nowrap" style="width:100%"></table>
+    </div>
+  </section>
+
+  <section class="grid-2 section">
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-trophy"></i> Top performers</h2></div>
+      <div class="section__body"><div id="topPerformers" class="rank-list"></div></div>
+    </div>
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-exclamation-octagon"></i> Top defaulters</h2></div>
+      <div class="section__body"><div id="topDefaulters" class="rank-list"></div></div>
+    </div>
+  </section>
+
+  <section class="grid-2 section">
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-graph-up-arrow"></i> Top 5 consecutive performers</h2></div>
+      <div class="section__body"><div id="consecPerformers" class="rank-list"></div></div>
+    </div>
+    <div class="card-surface">
+      <div class="section__head"><h2><i class="bi bi-graph-down-arrow"></i> Top 5 consecutive defaulters</h2></div>
+      <div class="section__body"><div id="consecDefaulters" class="rank-list"></div></div>
+    </div>
+  </section>
+</div>

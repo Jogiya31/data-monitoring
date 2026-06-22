@@ -1,0 +1,53 @@
+<div class="content">
+  <div class="page-head">
+    <h1>Data Anomaly Analysis</h1>
+    <p>Detect zero, consecutive-zero, negative, cumulative-dip and abnormal-spike patterns within each frequency.</p>
+  </div>
+
+  <section class="section"><div class="kpi-grid" id="anomalyKpis"></div></section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-0-circle"></i> Zero value analysis</h2><span class="sub">Current value = 0</span></div>
+    <div class="section__body grid-2-1">
+      <div class="table-scroll"><table id="zeroTable" class="display nowrap" style="width:100%"></table></div>
+      <div><div id="zeroTrend" class="chart-box sm"></div></div>
+    </div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-stack"></i> Consecutive zero analysis</h2><span class="sub">Current + previous = 0</span></div>
+    <div class="section__body grid-2-1">
+      <div><div id="consecZeroChart" class="chart-box"></div></div>
+      <div class="table-scroll"><table id="consecZeroTable" class="display nowrap" style="width:100%"></table></div>
+    </div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-dash-circle"></i> Negative value analysis</h2><span class="sub">Current value &lt; 0</span></div>
+    <div class="section__body grid-2-1">
+      <div class="table-scroll"><table id="negTable" class="display nowrap" style="width:100%"></table></div>
+      <div><div id="negChart" class="chart-box sm"></div></div>
+    </div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-funnel"></i> Cumulative dip analysis</h2><span class="sub">Current &lt; previous</span></div>
+    <div class="section__body grid-3">
+      <div><div id="dipFunnel" class="chart-box sm"></div></div>
+      <div><div id="dipTrend" class="chart-box sm"></div></div>
+      <div><div id="dipState" class="chart-box sm"></div></div>
+    </div>
+  </section>
+
+  <section class="card-surface section">
+    <div class="section__head"><h2><i class="bi bi-graph-up-arrow"></i> Abnormal spike analysis</h2><span class="sub">((Current − Previous) / Previous) × 100</span></div>
+    <div class="section__body">
+      <div class="kpi-grid" id="spikeBands" style="margin-bottom:16px"></div>
+      <div class="grid-3">
+        <div><h3 style="font-size:13px;margin-bottom:8px">State wise</h3><div id="spikeState" class="chart-box sm"></div></div>
+        <div><h3 style="font-size:13px;margin-bottom:8px">District wise</h3><div id="spikeDistrict" class="chart-box sm"></div></div>
+        <div><h3 style="font-size:13px;margin-bottom:8px">Scheme wise</h3><div id="spikeScheme" class="chart-box sm"></div></div>
+      </div>
+    </div>
+  </section>
+</div>

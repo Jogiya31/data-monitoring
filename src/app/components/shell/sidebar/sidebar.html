@@ -1,0 +1,29 @@
+<aside class="app-sidebar">
+  <div class="app-sidebar__label">Modules</div>
+  <nav class="app-nav" aria-label="Modules">
+    <a routerLink="/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+      <i class="bi bi-grid-1x2"></i><span>Overview</span>
+    </a>
+    <a routerLink="/delay" routerLinkActive="active" class="nav-link">
+      <i class="bi bi-clock-history"></i><span>Data Delay</span>
+    </a>
+    <a routerLink="/department" routerLinkActive="active" class="nav-link">
+      <i class="bi bi-building"></i><span>Department</span>
+    </a>
+    <a routerLink="/anomaly" routerLinkActive="active" class="nav-link">
+      <i class="bi bi-activity"></i><span>Anomaly</span>
+    </a>
+    <a routerLink="/reports" routerLinkActive="active" class="nav-link">
+      <i class="bi bi-file-earmark-bar-graph"></i><span>Reports</span>
+    </a>
+    <a routerLink="/alerts" routerLinkActive="active" class="nav-link">
+      <i class="bi bi-bell"></i><span>Alerts</span>
+    </a>
+  </nav>
+  <div class="app-sidebar__spacer"></div>
+  <div class="sidebar-card">
+    <strong>On-time submissions</strong>
+    <span class="tnum">—</span>
+    <small>Across all monitored schemes</small>
+  </div>
+</aside>

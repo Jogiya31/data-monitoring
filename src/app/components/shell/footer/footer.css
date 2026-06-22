@@ -1,0 +1,14 @@
+
+/* ---- footer -------------------------------------------------------------- */
+.app-footer { border-top: 1px solid var(--c-border); background: var(--c-surface); padding: 14px 22px; margin-top: 8px; }
+.app-footer__bar { display: flex; justify-content: center; text-align: center; flex-wrap: wrap; gap: 8px; font-size: 12px; color: var(--c-faint); }
+.app-footer__grid { display: flex; flex-wrap: wrap; gap: 24px 40px; justify-content: space-between; max-width: 1280px; }
+.app-footer__brand { max-width: 320px; }
+.app-footer__brand .fb-mark { display: flex; align-items: center; gap: 9px; font-weight: 800; letter-spacing: .04em; }
+.app-footer__brand .fb-mark .brand__mark { width: 30px; height: 30px; font-size: 15px; }
+.app-footer__brand p { color: var(--c-muted); font-size: 12.5px; margin: 9px 0 0; }
+.app-footer__col h4 { font-size: 11px; text-transform: uppercase; letter-spacing: .05em; color: var(--c-faint); margin-bottom: 9px; }
+.app-footer__col a { display: block; color: var(--c-muted); font-size: 12.8px; padding: 3px 0; }
+.app-footer__col a:hover { color: var(--c-primary); text-decoration: none; }
+.app-footer__col .stat { font-size: 12.8px; color: var(--c-muted); padding: 3px 0; }
+.app-footer__col .stat b { color: var(--c-text); }

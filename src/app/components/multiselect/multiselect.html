@@ -1,0 +1,35 @@
+﻿<div class="dropdown">
+  <button
+    class="btn ms__btn dropdown-toggle w-100 text-start"
+    type="button"
+    data-bs-toggle="dropdown"
+  >
+    {{ selectedItems.length ? selectedItems.length + ' Selected' : 'Select Items' }}
+  </button>
+
+  <div class="dropdown-menu ms__panel p-3 w-100">
+    <input
+      type="text"
+      class="ms__search"
+      data-i18n-ph="ms.searchPlaceholder"
+      placeholder="Search…"
+    />
+    <div class="ms__list">
+      <div class="ms__opt" *ngFor="let item of options">
+        <input
+          type="checkbox"
+          [checked]="isSelected(item)"
+          (change)="toggleSelection(item)"
+          [id]="'item-' + item.value"
+        />
+        <span class="form-check-label">
+          {{ item.label }}
+        </span>
+      </div>
+    </div>
+    <div class="ms__foot">
+      <button type="button" class="ms__all" (click)="selectAll()">Select All</button>
+      <button type="button" class="ms__clear" (click)="clearAll()">Clear</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="content">
+  <div class="page-head">
+    <div class="page-head__row">
+      <div>
+        <h1>Reports &amp; Analytics Center</h1>
+        <p id="reportSubtitle">Generate, preview and export 17 standard PRAYAS reports for the current filtered view.</p>
+      </div>
+      <div class="pill-row">
+        <span class="chip chip--muted" id="reportScopeChip"><i class="bi bi-funnel"></i> Current filters applied</span>
+      </div>
+    </div>
+  </div>
+
+  <section class="grid-report section">
+    <aside class="card-surface report-picker">
+      <div class="section__head"><h2><i class="bi bi-collection"></i> Reports</h2></div>
+      <div class="section__body">
+        <div class="report-toolbar">
+          <input type="text" id="reportSearch" class="form-control form-control-sm" placeholder="Search reports…">
+          <div class="report-bulk">
+            <label><input type="checkbox" id="reportSelAll"> Select all</label>
+            <span class="sel-n" id="reportSelN">0 selected</span>
+          </div>
+          <div class="report-dl">
+            <button class="btn-soft" type="button" id="dlSelExcel" disabled><i class="bi bi-file-earmark-excel"></i> Excel</button>
+            <button class="btn-soft" type="button" id="dlSelZip" disabled><i class="bi bi-file-earmark-zip"></i> CSV ZIP</button>
+            <button class="btn-primary-solid" type="button" id="dlAll"><i class="bi bi-download"></i> Download all</button>
+          </div>
+        </div>
+        <div class="report-list" id="reportList"></div>
+      </div>
+    </aside>
+    <div class="card-surface">
+      <div class="section__head">
+        <h2><i class="bi bi-file-earmark-bar-graph"></i> <span id="reportTitle">Complete Delay Report</span></h2>
+        <span class="sub" id="reportMeta"></span>
+      </div>
+      <div class="section__body table-scroll">
+        <table id="reportTable" class="display nowrap" style="width:100%"></table>
+      </div>
+    </div>
+  </section>
+</div>

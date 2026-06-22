@@ -1,0 +1,18 @@
+<app-header></app-header>
+<div class="app-shell">
+  <app-sidebar></app-sidebar>
+  <div class="app-body">
+    <app-filter-bar
+      (sectorChange)="onSectorChange($event)"
+      (stateChange)="onStateChange($event)"
+      (districtChange)="onDistrictChange($event)"
+      (schemeChange)="onSchemeChange($event)"
+      (kpiChange)="onKPIChange($event)"
+      (dataFrequencyChange)="onDataFrequencyChange($event)"
+    ></app-filter-bar>
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
+    <app-footer [year]="currentYear"></app-footer>
+  </div>
+</div>

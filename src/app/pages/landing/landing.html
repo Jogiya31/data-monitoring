@@ -1,0 +1,131 @@
+<canvas id="matrix"></canvas>
+  <div class="bg-orbs"><span class="orb o1"></span><span class="orb o2"></span><span class="orb o3"></span><span class="orb o4"></span></div>
+  <div class="grid-veil"></div>
+
+  <div class="page">
+    <!-- NAV -->
+    <header class="lnav">
+      <div class="wrap lnav__in">
+        <a class="lbrand" routerLink="/">
+          <span class="lbrand__mark">P</span>
+          <span class="lbrand__txt"><span data-i18n="app.name">PRAYAS</span><small data-i18n="app.tagline">Data Monitoring Dashboard</small></span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><i class="bi bi-list"></i></button>
+        <nav class="lnav__links" id="navLinks">
+          <a class="navlink" href="#features" data-i18n="land.nav.features">Features</a>
+          <a class="navlink" href="#benefits" data-i18n="land.nav.benefits">Benefits</a>
+          <a class="navlink" href="#how" data-i18n="land.nav.how">How it works</a>
+          <div class="llang">
+            <button class="llang__btn" id="landLangBtn"><i class="bi bi-translate"></i> <span id="landLangCur">EN</span> <i class="bi bi-chevron-down" style="font-size:11px"></i></button>
+            <div class="llang__menu" id="landLangMenu" role="menu"></div>
+          </div>
+          <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme"><i class="bi bi-moon-stars"></i></button>
+          <a class="btn btn--ghost" data-cta-primary style="cursor:pointer" data-i18n="land.signin">Sign In</a>
+          <a class="btn btn--solid" data-cta-signup style="cursor:pointer" data-i18n="land.signup">Sign Up</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="lhero">
+      <div class="wrap">
+        <span class="lbadge"><span class="dot"></span> <span data-i18n="land.hero.badge">Government of India · Programme Monitoring</span></span>
+        <h1 data-i18n="land.hero.title">Monitor scheme data the moment it slips</h1>
+        <p class="lead" data-i18n="land.hero.sub">PRAYAS is a centralised data-monitoring dashboard that tracks submission delays, surfaces KPI anomalies, and compares reporting frequencies across ministries, departments, states and districts — all in one colourful, real-time view.</p>
+        <div class="hero__cta">
+          <a class="btn btn--solid btn--lg" data-cta-primary style="cursor:pointer"><i class="bi bi-box-arrow-in-right"></i> <span data-i18n="land.hero.cta1">Sign in to dashboard</span></a>
+          <a class="btn btn--ghost btn--lg" data-cta-signup style="cursor:pointer"><i class="bi bi-person-plus"></i> <span data-i18n="land.hero.cta2">Create an account</span></a>
+        </div>
+        <div class="hero__stats">
+          <div class="hstat"><b data-count="61">0</b><span data-i18n="land.hero.stat1">Departments / Ministries</span></div>
+          <div class="hstat"><b data-count="36">0</b><span data-i18n="land.hero.stat2">States &amp; UTs</span></div>
+          <div class="hstat"><b data-count="789">0</b><span data-i18n="land.hero.stat3">Districts</span></div>
+          <div class="hstat"><b data-count="17">0</b><span data-i18n="land.hero.stat4">Standard reports</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INTRO -->
+    <section class="block">
+      <div class="wrap intro reveal">
+        <div class="intro__card glass">
+          <h2 data-i18n="land.intro.title">What is PRAYAS?</h2>
+          <p data-i18n="land.intro.body">PRAYAS gives programme-monitoring teams a single, real-time window into the health of scheme data submissions. Instead of chasing spreadsheets, teams see exactly which schemes are late, which values look abnormal, and where intervention is needed — across every level of government.</p>
+        </div>
+        <div class="intro__visual stagger">
+          <div class="iv"><i class="bi bi-speedometer2"></i><b data-i18n="nav.delay">Data Delay</b></div>
+          <div class="iv"><i class="bi bi-activity"></i><b data-i18n="nav.anomaly">Anomaly Analysis</b></div>
+          <div class="iv"><i class="bi bi-file-earmark-bar-graph"></i><b data-i18n="nav.reports">Reports Center</b></div>
+          <div class="iv"><i class="bi bi-bell"></i><b data-i18n="nav.alerts">Alerts Center</b></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENEFITS -->
+    <section class="block" id="benefits">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow" data-i18n="land.purpose.sub">Why monitoring teams rely on PRAYAS</div>
+          <h2 data-i18n="land.purpose.title">Purpose &amp; benefits</h2>
+        </div>
+        <div class="grid grid--4 stagger reveal">
+          <div class="card"><div class="card__icon c1"><i class="bi bi-clock-history"></i></div><h3 data-i18n="land.ben1.title">Catch delays early</h3><p data-i18n="land.ben1.body">Grace-period and frequency tracking flag late submissions before they become defaulters.</p></div>
+          <div class="card"><div class="card__icon c2"><i class="bi bi-exclamation-octagon"></i></div><h3 data-i18n="land.ben2.title">Spot data anomalies</h3><p data-i18n="land.ben2.body">Zero, negative, dip and abnormal-spike detection surface suspect values automatically.</p></div>
+          <div class="card"><div class="card__icon c4"><i class="bi bi-graph-up-arrow"></i></div><h3 data-i18n="land.ben3.title">Decide with clarity</h3><p data-i18n="land.ben3.body">Colourful KPIs, charts and rankings turn raw records into decisions at a glance.</p></div>
+          <div class="card"><div class="card__icon c5"><i class="bi bi-file-earmark-arrow-down"></i></div><h3 data-i18n="land.ben4.title">Report in one click</h3><p data-i18n="land.ben4.body">Seventeen ready reports export to Excel, CSV, PDF or print — individually or in bulk.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="block" id="features">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow" data-i18n="land.feat.sub">Everything a monitoring user needs</div>
+          <h2 data-i18n="land.feat.title">Key features</h2>
+        </div>
+        <div class="grid grid--4 stagger reveal">
+          <div class="card"><div class="card__icon c1"><i class="bi bi-speedometer2"></i></div><h3 data-i18n="land.f1.title">Delay &amp; defaulter dashboard</h3><p data-i18n="land.f1.body">KPIs, frequency analysis, grace tracking and a full detail table for every scheme.</p></div>
+          <div class="card"><div class="card__icon c3"><i class="bi bi-building"></i></div><h3 data-i18n="land.f2.title">Department-wise reporting</h3><p data-i18n="land.f2.body">Delay rates and average delay rolled up by department, ministry, state and district.</p></div>
+          <div class="card"><div class="card__icon c2"><i class="bi bi-activity"></i></div><h3 data-i18n="land.f3.title">Anomaly analysis</h3><p data-i18n="land.f3.body">Zero, consecutive-zero, negative, cumulative-dip and abnormal-spike detection.</p></div>
+          <div class="card"><div class="card__icon c6"><i class="bi bi-file-earmark-bar-graph"></i></div><h3 data-i18n="land.f4.title">Reports &amp; analytics center</h3><p data-i18n="land.f4.body">17 standard reports with multi-select bulk export to Excel and CSV.</p></div>
+          <div class="card"><div class="card__icon c5"><i class="bi bi-bell"></i></div><h3 data-i18n="land.f5.title">Alerts &amp; notifications</h3><p data-i18n="land.f5.body">Severity-ranked, searchable alert stream with acknowledge, snooze and export.</p></div>
+          <div class="card"><div class="card__icon c4"><i class="bi bi-funnel"></i></div><h3 data-i18n="land.f6.title">Powerful filtering</h3><p data-i18n="land.f6.body">Multi-select Sector, Department, State, District, Scheme, KPI and free-text search.</p></div>
+          <div class="card"><div class="card__icon c7"><i class="bi bi-translate"></i></div><h3 data-i18n="land.f7.title">Bilingual &amp; responsive</h3><p data-i18n="land.f7.body">English &amp; Hindi throughout, on desktop, tablet and mobile.</p></div>
+          <div class="card"><div class="card__icon c8"><i class="bi bi-hdd-network"></i></div><h3 data-i18n="land.f8.title">Live or sample data</h3><p data-i18n="land.f8.body">Connects to the monitoring API, with a built-in sample dataset for demos.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT HELPS -->
+    <section class="block" id="how">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow" data-i18n="land.how.sub">From raw submissions to decisions in four steps</div>
+          <h2 data-i18n="land.how.title">How PRAYAS helps you monitor &amp; analyze</h2>
+        </div>
+        <div class="steps stagger reveal">
+          <div class="step"><div class="step__n"></div><h3 data-i18n="land.s1.title">Connect</h3><p data-i18n="land.s1.body">PRAYAS pulls every scheme record from the monitoring API into one dataset.</p></div>
+          <div class="step"><div class="step__n"></div><h3 data-i18n="land.s2.title">Filter</h3><p data-i18n="land.s2.body">Narrow to the sectors, departments, states, districts and KPIs that matter.</p></div>
+          <div class="step"><div class="step__n"></div><h3 data-i18n="land.s3.title">Detect</h3><p data-i18n="land.s3.body">Delays, defaulters and anomalies are computed and surfaced automatically.</p></div>
+          <div class="step"><div class="step__n"></div><h3 data-i18n="land.s4.title">Act</h3><p data-i18n="land.s4.body">Acknowledge alerts, export reports and brief leadership with executive summaries.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="block">
+      <div class="wrap reveal">
+        <div class="cta-inner">
+          <h2 data-i18n="land.cta.title">Ready to start monitoring?</h2>
+          <p data-i18n="land.cta.body">Sign in to access the live Data Monitoring Dashboard.</p>
+          <div style="display:flex;gap:13px;justify-content:center;flex-wrap:wrap">
+            <a class="btn btn--solid btn--lg" data-cta-primary style="cursor:pointer"><i class="bi bi-box-arrow-in-right"></i> <span data-i18n="land.signin">Sign In</span></a>
+            <a class="btn btn--ghost btn--lg" data-cta-signup style="cursor:pointer"><i class="bi bi-person-plus"></i> <span data-i18n="land.signup">Sign Up</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="lfoot"><span id="landFoot" data-i18n="land.footer">© PRAYAS · Government of India · Data Monitoring Dashboard</span></footer>
+  </div>

@@ -1,0 +1,81 @@
+<canvas id="matrix"></canvas>
+  <span class="orb o1"></span><span class="orb o2"></span>
+
+  <div class="shell">
+    <!-- left brand panel -->
+    <aside class="aside">
+      <div class="aa-brand">
+        <span class="aa-mark">P</span>
+        <span><span data-i18n="app.name">PRAYAS</span><small data-i18n="app.tagline">Data Monitoring Dashboard</small></span>
+      </div>
+      <div class="aa-mid">
+        <h2 data-i18n="land.hero.title">Monitor scheme data the moment it slips</h2>
+        <ul class="aa-list">
+          <li><i class="bi bi-check-circle-fill"></i> <span data-i18n="land.ben1.title">Catch delays early</span></li>
+          <li><i class="bi bi-check-circle-fill"></i> <span data-i18n="land.ben2.title">Spot data anomalies</span></li>
+          <li><i class="bi bi-check-circle-fill"></i> <span data-i18n="land.ben3.title">Decide with clarity</span></li>
+          <li><i class="bi bi-check-circle-fill"></i> <span data-i18n="land.ben4.title">Report in one click</span></li>
+        </ul>
+      </div>
+      <div class="aa-foot" id="authAsideFoot" data-i18n="land.footer">© PRAYAS · Government of India · Data Monitoring Dashboard</div>
+    </aside>
+
+    <!-- right form panel -->
+    <main class="main">
+      <div class="top">
+        <a class="back-link" routerLink="/" style="cursor:pointer"><i class="bi bi-arrow-left"></i> <span data-i18n="login.back">Back to home</span></a>
+        <div style="display:flex;align-items:center;gap:10px">
+          <button class="theme-btn" id="themeBtn" aria-label="Toggle theme" title="Toggle theme"><i class="bi bi-moon-stars"></i></button>
+          <div class="llang">
+            <button class="llang__btn" id="authLangBtn"><i class="bi bi-translate"></i> <span id="authLangCur">EN</span> <i class="bi bi-chevron-down" style="font-size:11px"></i></button>
+            <div class="llang__menu" id="authLangMenu" role="menu"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h1 id="authTitle" data-i18n="login.welcome">Welcome back</h1>
+        <p class="sub" id="authSub" data-i18n="login.sub">Sign in to the PRAYAS Data Monitoring Dashboard</p>
+
+        <div class="tabs">
+          <span class="tabs__ind" id="tabInd"></span>
+          <button id="tabLogin" class="active" data-i18n="login.tabLogin">Sign In</button>
+          <button id="tabSignup" data-i18n="login.tabSignup">Sign Up</button>
+        </div>
+
+        <form id="authForm" novalidate>
+          <div class="field hide" id="fName">
+            <label data-i18n="login.name">Full name</label>
+            <div class="inp"><i class="bi bi-person"></i><input type="text" id="iName" data-i18n-ph="login.namePh" placeholder="Your full name" autocomplete="name"></div>
+            <div class="msg" data-i18n="login.errName">Please enter your name.</div>
+          </div>
+          <div class="field" id="fEmail">
+            <label data-i18n="login.email">Email address</label>
+            <div class="inp"><i class="bi bi-envelope"></i><input type="email" id="iEmail" data-i18n-ph="login.emailPh" placeholder="admin&#64;prayas.gov.in" autocomplete="email"></div>
+            <div class="msg" data-i18n="login.errEmail">Please enter a valid email address.</div>
+          </div>
+          <div class="field" id="fPassword">
+            <label data-i18n="login.password">Password</label>
+            <div class="inp"><i class="bi bi-lock"></i><input type="password" id="iPassword" data-i18n-ph="login.passwordPh" placeholder="Enter your password" autocomplete="current-password"><i class="bi bi-eye toggle-pw" id="togglePw"></i></div>
+            <div class="msg" data-i18n="login.errPassword">Password must be at least 4 characters.</div>
+          </div>
+          <div class="field hide" id="fConfirm">
+            <label data-i18n="login.confirm">Confirm password</label>
+            <div class="inp"><i class="bi bi-lock-fill"></i><input type="password" id="iConfirm" data-i18n-ph="login.passwordPh" placeholder="Enter your password" autocomplete="new-password"></div>
+            <div class="msg" data-i18n="login.errConfirm">Passwords do not match.</div>
+          </div>
+
+          <div class="row-between" id="loginRow">
+            <label class="check"><input type="checkbox" id="iRemember" checked> <span data-i18n="login.remember">Remember me</span></label>
+            <span class="link" data-i18n="login.forgot">Forgot password?</span>
+          </div>
+
+          <button type="submit" class="btn-submit" id="submitBtn" data-i18n="login.signin">Sign in</button>
+          <div class="ok-flash" id="okFlash" data-i18n="login.success">Signed in — opening dashboard…</div>
+        </form>
+
+        <div class="demo-note" data-i18n="login.demoNote">Demo build — any email and password will sign you in.</div>
+        <div class="swap" id="swapText"><span data-i18n="login.noAccount">Don't have an account?</span> <span class="link" id="swapLink" data-i18n="login.signupLink">Sign Up</span></div>
+      </div>
+    </main>
+  </div>

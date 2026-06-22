@@ -1,0 +1,79 @@
+<div class="content">
+  <div class="page-head">
+    <div class="page-head__row">
+      <div>
+        <h1>Alerts &amp; Notifications Center</h1>
+        <p>Categorized, severity-ranked alerts generated from the current filtered view, plus delivery settings and summary templates.</p>
+      </div>
+      <div class="pill-row">
+        <button class="btn-soft" type="button" id="btnExportAlerts"><i class="bi bi-download"></i> Export</button>
+        <button class="btn-soft" type="button" id="btnAckAll"><i class="bi bi-check2-all"></i> Acknowledge all</button>
+      </div>
+    </div>
+  </div>
+
+  <section class="section"><div class="kpi-grid" id="alertKpis"></div></section>
+
+  <section class="grid-2-1 section">
+    <div class="card-surface">
+      <div class="section__head">
+        <h2><i class="bi bi-bell"></i> Alert stream</h2>
+        <span class="sub" id="alertCount"></span>
+      </div>
+      <div class="section__body">
+        <div class="alert-toolbar">
+          <div class="as-search"><i class="bi bi-search"></i><input type="text" id="asSearch" placeholder="Search alerts, schemes, locations…"></div>
+          <select id="asSev" aria-label="Severity filter">
+            <option value="all">All severities</option>
+            <option value="high">High only</option>
+            <option value="medium">Medium only</option>
+            <option value="low">Low only</option>
+          </select>
+          <select id="asSort" aria-label="Sort by">
+            <option value="severity">Sort: Severity</option>
+            <option value="newest">Sort: Newest</option>
+            <option value="category">Sort: Category</option>
+          </select>
+          <label class="as-toggle"><input type="checkbox" id="asGroup" checked> Group</label>
+          <label class="as-toggle"><input type="checkbox" id="asUnack"> Unread only</label>
+        </div>
+        <div class="pill-row" id="categoryPills" style="margin-bottom:14px"></div>
+        <div class="alert-stream" id="alertStream"></div>
+      </div>
+    </div>
+
+    <div class="stack-col">
+      <div class="card-surface">
+        <div class="section__head"><h2><i class="bi bi-sliders"></i> Notification settings</h2></div>
+        <div class="section__body">
+          <h3 class="setting-label">Channels</h3>
+          <label class="switch-row"><span><i class="bi bi-bell"></i> Dashboard bell</span><input type="checkbox" checked></label>
+          <label class="switch-row"><span><i class="bi bi-envelope"></i> Email notification</span><input type="checkbox" checked></label>
+          <label class="switch-row"><span><i class="bi bi-calendar-event"></i> Scheduled summary email</span><input type="checkbox"></label>
+
+          <h3 class="setting-label" style="margin-top:16px">Alert frequency</h3>
+          <div class="seg" role="radiogroup" aria-label="Alert frequency">
+            <label class="seg__item"><input type="radio" name="alertFreq" value="daily" checked> Daily</label>
+            <label class="seg__item"><input type="radio" name="alertFreq" value="weekly"> Weekly</label>
+            <label class="seg__item"><input type="radio" name="alertFreq" value="monthly"> Monthly</label>
+          </div>
+          <button class="btn-primary-soft" type="button" id="btnSaveSettings"><i class="bi bi-save"></i> Save preferences</button>
+        </div>
+      </div>
+
+      <div class="card-surface">
+        <div class="section__head"><h2><i class="bi bi-file-text"></i> Summary template</h2></div>
+        <div class="section__body">
+          <div class="seg seg--wrap" role="radiogroup" aria-label="Summary scope">
+            <label class="seg__item"><input type="radio" name="sumScope" value="Executive" checked> Executive</label>
+            <label class="seg__item"><input type="radio" name="sumScope" value="Department"> Department</label>
+            <label class="seg__item"><input type="radio" name="sumScope" value="Ministry"> Ministry</label>
+            <label class="seg__item"><input type="radio" name="sumScope" value="State"> State</label>
+            <label class="seg__item"><input type="radio" name="sumScope" value="District"> District</label>
+          </div>
+          <div class="summary-card" id="summaryCard"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
