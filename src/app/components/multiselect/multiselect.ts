@@ -1,23 +1,54 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+export interface SelectOption {
+  label: string;
+  value: number | string;
+}
 
 @Component({
   selector: 'app-multiselect',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './multiselect.html',
-  styleUrls: ['./multiselect.css'],
+  styleUrl: './multiselect.css',
 })
 export class MultiselectComponent {
-  @Input() options: any[] = [];
+  @Input() placeholder = 'Select Items';
 
-  @Output() selectionChange = new EventEmitter<any[]>();
+  @Input() options: SelectOption[] = [];
 
-  selectedItems: any[] = [];
+  @Output() selectionChange = new EventEmitter<SelectOption[]>();
 
-  toggleSelection(item: any) {
-    const index = this.selectedItems.findIndex((x) => x.value === item.value);
+  searchText = '';
+
+  selectedItems: SelectOption[] = [];
+
+  get filteredOptions(): SelectOption[] {
+    const search = this.searchText?.trim().toLowerCase();
+
+    if (!search) {
+      return this.options;
+    }
+
+    return this.options.filter((item) => item.label.toLowerCase().includes(search));
+  }
+
+  get displayText(): string {
+    if (this.selectedItems.length === 0) {
+      return this.placeholder;
+    }
+
+    if (this.selectedItems.length === 1) {
+      return this.selectedItems[0].label;
+    }
+
+    return `${this.selectedItems.length} Selected`;
+  }
+
+  toggleSelection(item: SelectOption): void {
+    const index = this.selectedItems.findIndex((selected) => selected.value === item.value);
 
     if (index > -1) {
       this.selectedItems.splice(index, 1);
@@ -28,17 +59,24 @@ export class MultiselectComponent {
     this.selectionChange.emit([...this.selectedItems]);
   }
 
-  isSelected(item: any) {
-    return this.selectedItems.some((x) => x.value === item.value);
+  isSelected(item: SelectOption): boolean {
+    return this.selectedItems.some((selected) => selected.value === item.value);
   }
 
-  selectAll() {
-    this.selectedItems = [...this.options];
-    this.selectionChange.emit(this.selectedItems);
+  selectAll(): void {
+    const selectedValues = new Set(this.selectedItems.map((item) => item.value));
+
+    this.filteredOptions.forEach((item) => {
+      if (!selectedValues.has(item.value)) {
+        this.selectedItems.push(item);
+      }
+    });
+
+    this.selectionChange.emit([...this.selectedItems]);
   }
 
-  clearAll() {
+  clearAll(): void {
     this.selectedItems = [];
-    this.selectionChange.emit(this.selectedItems);
+    this.selectionChange.emit([]);
   }
 }

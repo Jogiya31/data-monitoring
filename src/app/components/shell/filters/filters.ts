@@ -19,6 +19,9 @@ export class FilterBarComponent {
   @Output() schemeChange = new EventEmitter<any[]>();
   @Output() kpiChange = new EventEmitter<any[]>();
   @Output() dataFrequencyChange = new EventEmitter<any[]>();
+  @Output() modeChange = new EventEmitter<any>();
+
+  isOpen = false;
 
   sectorList = [
     { label: 'Agriculture & Rural', value: 1 },
@@ -28,13 +31,11 @@ export class FilterBarComponent {
     { label: 'Technology & Governance', value: 5 },
     { label: 'Foreign & Security', value: 6 },
     { label: 'Human Resources', value: 7 },
-    { label: 'Human Resources', value: 7 },
-    { label: 'Human Resources', value: 7 },
-    { label: 'Human Resources', value: 7 },
-    { label: 'Human Resources', value: 7 },
-    { label: 'Human Resources', value: 7 },
-    { label: 'Human Resources', value: 7 },
   ];
+
+  handleToggle() {
+    this.isOpen = !this.isOpen;
+  }
 
   onSectorChange(items: any[]) {
     this.sectorChange.emit(items);
@@ -62,4 +63,9 @@ export class FilterBarComponent {
   onDataFrequencyChange(items: any[]) {
     this.dataFrequencyChange.emit(items);
   }
+
+  onModeChange($event: any) {
+    this.modeChange.emit($event);
+  }
+  
 }
