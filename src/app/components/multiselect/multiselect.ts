@@ -41,11 +41,7 @@ export class MultiselectComponent {
       return this.placeholder;
     }
 
-    if (this.selectedItems.length === 1) {
-      return this.selectedItems[0].label;
-    }
-
-    return `${this.selectedItems.length} Selected`;
+    return this.selectedItems[0].label + (this.selectedItems.length > 1 ? ` +${this.selectedItems.length - 1}` : '');
   }
 
   get selectedCount(): number {

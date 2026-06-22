@@ -1,10 +1,15 @@
 ﻿<div class="dropdown">
   <button
-    class="btn ms__btn dropdown-toggle w-100 text-start"
+    [class]="selectedCount > 0 ? 'btn ms__btn has-val dropdown-toggle w-100 text-start' : 'btn ms__btn dropdown-toggle w-100 text-start'"
     type="button"
     data-bs-toggle="dropdown"
   >
-    {{ selectedItems.length ? selectedItems.length + ' Selected' : 'Select Items' }}
+    <span class="ms__txt">{{ displayText }}</span>
+    @if (selectedCount > 1) {
+      <span class="ms__count">
+        {{ selectedCount }}
+      </span>
+    }
   </button>
 
   <div class="dropdown-menu ms__panel p-3 w-100">

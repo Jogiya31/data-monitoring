@@ -42,6 +42,8 @@ export class FilterBarComponent {
 
   isOpen = false;
 
+  dirty = false;
+
   chipLimit = 8;
 
   chipsExpanded = false;
@@ -130,8 +132,9 @@ export class FilterBarComponent {
 
   onModeChange(event: Event): void {
     const target = event.target as HTMLInputElement;
-
     this.mode = target.value as 'all' | 'critical' | 'pragati';
+    this.dirty = true;
+    console.log('Mode changed:', this.mode);
   }
 
   // ==========================================
@@ -143,6 +146,7 @@ export class FilterBarComponent {
       ...this.filterState,
       [key]: [...items],
     };
+    this.dirty = true;
   }
 
   // ==========================================
@@ -153,6 +157,7 @@ export class FilterBarComponent {
       ...this.filterState,
       search: value,
     };
+    this.dirty = true;
   }
 
   // ==========================================
@@ -164,6 +169,7 @@ export class FilterBarComponent {
       ...this.filterState,
       fromDate: value,
     };
+    this.dirty = true;
   }
 
   onToDateChange(value: string): void {
@@ -171,6 +177,7 @@ export class FilterBarComponent {
       ...this.filterState,
       toDate: value,
     };
+    this.dirty = true;
   }
 
   // ==========================================
@@ -245,6 +252,7 @@ export class FilterBarComponent {
     if (this.activeChips.length <= this.chipLimit) {
       this.chipsExpanded = false;
     }
+    this.dirty = true;
   }
 
   // ==========================================
@@ -267,6 +275,7 @@ export class FilterBarComponent {
     };
 
     this.chipsExpanded = false;
+    this.dirty = false;
   }
 
   // ==========================================
@@ -310,5 +319,6 @@ export class FilterBarComponent {
   applyFilters(): void {
     console.log('Applied Filters:', this.filterState);
     this.filtersChange.emit(this.filterState);
+    this.dirty = false;
   }
 }

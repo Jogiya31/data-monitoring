@@ -1,4 +1,4 @@
-<section class="filter-bar" id="filterBar">
+<section [class]="isOpen ? 'filter-bar' : 'filter-bar collapsed'" id="filterBar">
   <div class="filter-bar__head">
     <button type="button" class="filter-bar__toggle" (click)="handleToggle()">
       <i class="bi bi-funnel-fill"></i>
@@ -14,7 +14,7 @@
       <i [class]="isOpen ? 'bi bi-chevron-up' : 'bi bi-chevron-down'"></i>
     </button>
 
-    <span [class]="isOpen ? 'filter-bar__hint' : 'filter-bar__hint--active'" id="filterHint">
+    <span class="filter-bar__hint" id="filterHint">
       {{ totalSelectedCount > 0 ? totalSelectedCount + ' filters applied' : 'No filters applied' }}
     </span>
   </div>
@@ -30,17 +30,17 @@
 
             <div class="seg" role="radiogroup" aria-label="Scope">
               <label class="seg__item">
-                <input type="radio" name="mode" value="all" checked />
+                <input type="radio" name="mode" value="all" checked  (change)="onModeChange($event)"/>
                 All
               </label>
 
               <label class="seg__item">
-                <input type="radio" name="mode" value="critical" />
+                <input type="radio" name="mode" value="critical" (change)="onModeChange($event)"/>
                 Critical
               </label>
 
               <label class="seg__item">
-                <input type="radio" name="mode" value="pragati" />
+                <input type="radio" name="mode" value="pragati" (change)="onModeChange($event)"/>
                 Pragati
               </label>
             </div>
@@ -206,7 +206,7 @@
               Reset
             </button>
 
-            <button class="btn-apply" type="button" (click)="applyFilters()">
+            <button [class]="dirty ? 'btn-apply dirty' : 'btn-apply '" type="button" (click)="applyFilters()">
               <span class="dot-dirty"></span>
               <i class="bi bi-funnel-fill"></i>
               Apply
