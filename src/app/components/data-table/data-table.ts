@@ -1,9 +1,152 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+  ElementRef,
+  ViewChild,
+} from '@angular/core';
+
+declare var DataTable: any;
 
 @Component({
   selector: 'app-data-table',
-  imports: [],
+  standalone: true,
   templateUrl: './data-table.html',
-  styleUrl: './data-table.css',
 })
-export class DataTable {}
+export class DataTableComponent implements OnInit, OnDestroy {
+  // Input properties for the component
+  @Input() columns: any[] = [];
+  @Input() data: any[] = [];
+  @Input() loading = false;
+
+  @Input() Columns = false;
+  @Input() CSV = false;
+  @Input() Excel = false;
+  @Input() PDF = false;
+  @Input() Print = false;
+
+  @Input() showSearch = true;
+  @Input() pageLength = 10;
+
+  @Input() columnDefs: any[] = [];
+  @Input() order: any[] = [];
+  @Input() language: any = {};
+
+  // Output event emitter for row click events
+  @Output() rowClicked = new EventEmitter<any>();
+
+  // Reference to the table element
+  @ViewChild('tableRef', { static: true })
+
+  // Reference to the table element
+  table!: ElementRef;
+
+  // Instance of the DataTable
+  dtInstance: any;
+
+  // Lifecycle hook called after the component is initialized
+  ngOnInit() {
+    setTimeout(() => this.initializeTable());
+  }
+
+  // Method to initialize the DataTable with the provided configurations
+  initializeTable() {
+    const buttons: any[] = [];
+    // Add buttons based on the input properties
+    if (this.Columns) {
+      buttons.push({
+        extend: 'colvis',
+        text: '<i class="bi bi-eye"></i> Columns',
+      });
+    }
+    // Add buttons based on the input properties
+    if (this.CSV) {
+      buttons.push({
+        extend: 'csv',
+        text: '<i class="bi bi-filetype-csv"></i> CSV',
+      });
+    }
+    // Add buttons based on the input properties
+    if (this.Excel) {
+      buttons.push({
+        extend: 'excel',
+        text: '<i class="bi bi-file-earmark-excel"></i> Excel',
+      });
+    }
+    // Add buttons based on the input properties
+    if (this.PDF) {
+      buttons.push({
+        extend: 'pdf',
+        text: '<i class="bi bi-file-earmark-pdf"></i> PDF',
+      });
+    }
+    // Add buttons based on the input properties
+    if (this.Print) {
+      buttons.push({
+        extend: 'print',
+        text: '<i class="bi bi-printer"></i> Print',
+      });
+    }
+
+    // Initialize the DataTable with the provided configurations
+    this.dtInstance = new DataTable(this.table.nativeElement, {
+      // Set the data and columns for the DataTable
+      data: this.data,
+      columns: this.columns,
+
+      // Set the column definitions and order for the DataTable
+      columnDefs: this.columnDefs,
+      order: this.order,
+
+      // Set the page length and length menu for the DataTable
+      pageLength: this.pageLength,
+      lengthMenu: [
+        [10, 25, 50, 100, -1],
+        [10, 25, 50, 100, 'All'],
+      ],
+
+      // Enable horizontal scrolling for the DataTable
+      scrollX: true,
+
+      // Set the DOM structure for the DataTable based on the showSearch input property
+      dom: this.showSearch ? "<'dt-top'Bf>rt<'dt-bottom'lip>" : "<'dt-top'B>rt<'dt-bottom'lip>",
+
+      // Set the buttons for the DataTable based on the input properties
+      buttons,
+
+      // Set the language for the DataTable based on the input property
+      language: this.language,
+    });
+
+    // Bind the row click event to emit the row data
+    this.bindRowClick();
+  }
+  // Method to bind the row click event to emit the row data
+  private bindRowClick() {
+    // Get the tbody element of the table
+    const tbody = this.table.nativeElement.querySelector('tbody');
+
+    // Add a click event listener to the tbody element
+    tbody?.addEventListener('click', (event: any) => {
+      const tr = event.target.closest('tr');
+
+      if (!tr) return;
+
+      // Get the row data for the clicked row
+      const rowData = this.dtInstance.row(tr).data();
+
+      // Emit the row data when a row is clicked
+      this.rowClicked.emit(rowData);
+    });
+  }
+
+  // Lifecycle hook called when the component is destroyed
+  ngOnDestroy() {
+    if (this.dtInstance) {
+      this.dtInstance.destroy();
+    }
+  }
+}
