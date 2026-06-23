@@ -7,10 +7,10 @@ import { Component, Input } from '@angular/core';
   styleUrl: './kpi-card.css',
 })
 export class KpiCard {
-  @Input() cls = '';
-  @Input() icon = '';
-  @Input() label = '';
-  @Input() value = '';
-  @Input() foot = '';
+  @Input() cls: string = '';
+  @Input() icon: string = '';
+  @Input() label: string = '';
+  @Input() value: string | number | null = null;
+  @Input() foot: string = '';
   @Input() go: (() => void) | null = null;
 }

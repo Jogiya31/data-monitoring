@@ -436,8 +436,9 @@ h4 {
 }
 
 .app-sidebar {
-  position: sticky;
+  position: fixed;
   top: var(--header-h);
+  left: 0;
   flex: none;
   width: var(--sidebar-w);
   height: calc(100vh - var(--header-h));
@@ -535,6 +536,7 @@ h4 {
   display: flex;
   flex-direction: column;
   min-height: calc(100vh - var(--header-h));
+  margin-left: var(--sidebar-w);
 }
 
 /* ---- horizontal filter bar ----------------------------------------------- */

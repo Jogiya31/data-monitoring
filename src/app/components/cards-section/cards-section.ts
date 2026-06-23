@@ -10,6 +10,6 @@ import { Component, Input } from '@angular/core';
 export class CardsSection {
   @Input() title = 'Complete dataset';
   @Input() icon = '';
-  @Input() info = '';
+  @Input() subtitle = '';
 
 }
