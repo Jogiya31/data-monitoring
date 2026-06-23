@@ -3,11 +3,18 @@
   <app-hero></app-hero>
 
   <section class="section">
-    <div class="kpi-grid" id="overviewKpis"></div>
+    <div class="kpi-grid" id="overviewKpis">
+      <!-- KPIs will be rendered here by the component -->
+       <app-kpi-card cls="info" icon="collection" label="Schemes monitored" value="2,400" foot="Across current filters"></app-kpi-card>
+       <app-kpi-card cls="danger" icon="exclamation-octagon" label="Critical Schemes" value="808" foot="Across current filters"></app-kpi-card>
+       <app-kpi-card cls="warn" icon="clock-history" label="Delayed submissions" value="1,560" foot="Across current filters"></app-kpi-card>
+       <app-kpi-card cls="accent" icon="person-x" label="Defaulters" value="1,445" foot="Across current filters"></app-kpi-card>
+       <app-kpi-card cls="teal" icon="shield-exclamation" label="Outside grace" value="1,324" foot="Across current filters"></app-kpi-card>
+    </div>
   </section>
 
   <!-- // Data Table Section -->
-  <app-cards-section title="Complete dataset" icon="bi bi-table" info="Total records: 0">
+  <app-cards-section title="Complete dataset" icon="table" info="Total records: 0">
     <div class="section__body table-scroll">
       <table id="allDataTable" class="display nowrap" style="width: 100%"></table>
     </div>
