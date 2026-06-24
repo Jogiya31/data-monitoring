@@ -1,0 +1,12 @@
+:host {
+  display: block;
+  width: 100%;
+  /* inherit the parent's min-height (e.g. .chart-box) so percentage heights resolve */
+  min-height: inherit;
+}
+
+:host > div,
+#chartRef {
+  width: 100%;
+  height: 100%;
+}

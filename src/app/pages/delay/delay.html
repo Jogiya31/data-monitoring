@@ -15,14 +15,15 @@
 
   <section class="section">
     <div class="kpi-grid" id="kpiGrid">
-      <app-kpi-card
-        *ngFor="let item of cards; index as i"
-        [cls]="item.cls"
-        [icon]="item.icon"
-        [label]="item.label"
-        [value]="item.value"
-        [foot]="item.foot"
-      ></app-kpi-card>
+      @for (item of cards; track $index) {
+        <app-kpi-card
+          [cls]="item.cls"
+          [icon]="item.icon"
+          [label]="item.label"
+          [value]="item.value"
+          [foot]="item.foot"
+        ></app-kpi-card>
+      }
     </div>
   </section>
 
@@ -33,26 +34,30 @@
       icon="bar-chart"
     >
       <div class="section__body">
-        <app-chart
-          type="bar"
-          [categories]="delayCategories"
-          [series]="delaySeries"
-          [colors]="delayColors"
-          (pointClick)="onDelayChartClick($event)"
-        >
-        </app-chart>
+        <div class="chart-box">
+          <app-chart
+            type="bar"
+            [categories]="delayCategories"
+            [series]="delaySeries"
+            [colors]="delayColors"
+            (pointClick)="onDelayChartClick($event)"
+          >
+          </app-chart>
+        </div>
       </div>
     </app-cards-section>
-    <app-cards-section title="Grace period" subtitle="Click a card to filter" icon="shield-check">
+    <app-cards-section title="Grace period" icon="shield-check">
       <div class="section__body">
-        <app-chart
-          type="donut"
-          [categories]="graceLabels"
-          [series]="graceSeries"
-          [colors]="graceColors"
-          (pointClick)="onGraceClick($event)"
-        >
-        </app-chart>
+        <div class="chart-box">
+          <app-chart
+            type="donut"
+            [categories]="graceLabels"
+            [series]="graceSeries"
+            [colors]="graceColors"
+            (pointClick)="onGraceClick($event)"
+          >
+          </app-chart>
+        </div>
       </div>
     </app-cards-section>
   </section>
@@ -64,17 +69,19 @@
       icon="pie-chart"
     >
       <div class="section__body">
-        <app-chart
-          type="donut"
-          [categories]="freqLabels"
-          [series]="freqSeries"
-          (pointClick)="onFrequencyClick($event)"
-        >
-        </app-chart>
+        <div class="chart-box sm">
+          <app-chart
+            type="donut"
+            [categories]="freqLabels"
+            [series]="freqSeries"
+            (pointClick)="onFrequencyClick($event)"
+          >
+          </app-chart>
+        </div>
       </div>
     </app-cards-section>
 
-    <app-cards-section title="Frequency summary" subtitle="Click a slice to filter" icon="table">
+    <app-cards-section title="Frequency summary" icon="table">
       <div class="section__body table-scroll">
         <table id="freqSummary" class="table table-sm p-3" style="width: 100%">
           <thead>
@@ -124,28 +131,29 @@
     </app-cards-section>
   </section>
 
-  <!-- detailed delay analysis -->
-  <app-cards-section
-    title="Detailed delay analysis"
-    subtitle="Click a row to filter"
-    icon="list-ul"
-  >
-    <app-data-table
-      [data]="tableData"
-      [columns]="tableColumns"
-      [order]="[[4, 'desc']]"
-      [pageLength]="10"
-      [Columns]="true"
-      [CSV]="true"
-      [Excel]="true"
-      [PDF]="true"
-      [Print]="true"
+  <section class="section">
+    <app-cards-section
+      title="Detailed delay analysis"
+      subtitle="{{ tableData.length }} records"
+      icon="list-ul"
     >
-    </app-data-table>
-  </app-cards-section>
+      <app-data-table
+        [data]="tableData"
+        [columns]="tableColumns"
+        [order]="[[4, 'desc']]"
+        [pageLength]="10"
+        [Columns]="true"
+        [CSV]="true"
+        [Excel]="true"
+        [PDF]="true"
+        [Print]="true"
+      >
+      </app-data-table>
+    </app-cards-section>
+  </section>
 
   <section class="grid-2 section">
-    <app-cards-section title="Top performers" subtitle="Click a row to filter" icon="trophy">
+    <app-cards-section title="Top performers"  icon="trophy">
       <div class="section__body">
         <div id="topPerformers" class="rank-list">
           @for (item of topPerformers; track $index) {
@@ -163,7 +171,6 @@
     </app-cards-section>
     <app-cards-section
       title="Top defaulters"
-      subtitle="Click a row to filter"
       icon="exclamation-octagon"
     >
       <div class="section__body">
@@ -186,7 +193,6 @@
   <section class="grid-2 section">
     <app-cards-section
       title="Top 5 consecutive performers"
-      subtitle="Click a row to filter"
       icon="graph-up-arrow"
     >
       <div class="section__body">
@@ -207,7 +213,6 @@
 
     <app-cards-section
       title="Top 5 consecutive defaulters"
-      subtitle="Click a row to filter"
       icon="graph-down-arrow"
     >
       <div class="section__body">

@@ -95,23 +95,23 @@ export class DelayComponent implements AfterViewInit {
   ];
 
   //
-  delayCategories = ['Daily', 'Weekly', 'Monthly'];
+  delayCategories = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Half-Yearly', 'Yearly'];
   delaySeries = [
     {
       name: 'Delayed',
-      data: [25, 18, 12],
+      data: [280, 320, 290, 300, 310, 270],
     },
     {
-      name: 'Defaulters',
-      data: [15, 10, 5],
+      name: 'Grace',
+      data: [120, 95, 60, 70, 40, 35],
     },
   ];
 
   graceLabels = ['Within grace', 'Outside grace', 'On time'];
-  graceSeries = [25, 15, 60];
+  graceSeries = [120, 95, 60];
 
-  freqLabels = ['Daily', 'Weekly', 'Monthly'];
-  freqSeries = [40, 25, 35];
+  freqLabels = ['Daily', 'Weekly', 'Monthly', 'Quarterly', 'Half-Yearly', 'Yearly'];
+  freqSeries = [300, 285, 260, 270, 320, 240];
 
   onDelayChartClick(event: any) {
     console.log(event);

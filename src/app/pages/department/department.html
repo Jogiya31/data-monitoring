@@ -5,47 +5,190 @@
         <h1>Department Wise Delay Report</h1>
         <p id="deptSubtitle">Delay rates and average delay across departments and ministries.</p>
       </div>
-      <div class="pill-row" id="deptDrillReset" style="display:none">
-        <button class="btn-soft" type="button" id="btnClearDept"><i class="bi bi-x-circle"></i> Clear department</button>
+      <div class="pill-row" id="deptDrillReset" style="display: none">
+        <button class="btn-soft" type="button" id="btnClearDept">
+          <i class="bi bi-x-circle"></i> Clear department
+        </button>
       </div>
     </div>
   </div>
 
-  <section class="section"><div class="kpi-grid" id="deptKpis"></div></section>
+  <section class="section">
+    <div class="kpi-grid" id="deptKpis">
+      @for (item of cards; track $index) {
+        <app-kpi-card
+          [cls]="item.cls"
+          [icon]="item.icon"
+          [label]="item.label"
+          [value]="item.value"
+          [foot]="item.foot"
+        ></app-kpi-card>
+      }
+    </div>
+  </section>
 
   <section class="grid-2-1 section">
-    <div class="card-surface">
-      <div class="section__head"><h2><i class="bi bi-building"></i> Department analysis</h2><span class="sub">Click a row to focus</span></div>
-      <div class="section__body table-scroll"><table id="deptTable" class="display nowrap" style="width:100%"></table></div>
-    </div>
-    <div class="card-surface">
-      <div class="section__head"><h2><i class="bi bi-pie-chart"></i> Grace split</h2></div>
-      <div class="section__body"><div id="deptGrace" class="chart-box sm"></div></div>
-    </div>
+    <app-cards-section title="Department analysis" subtitle="Click a row to focus" icon="building">
+      <app-data-table
+        [data]="tableData"
+        [columns]="tableColumns"
+        [order]="[[4, 'desc']]"
+        [pageLength]="10"
+        [Columns]="true"
+        [CSV]="true"
+        [Excel]="true"
+        [PDF]="true"
+        [Print]="true"
+      ></app-data-table>
+    </app-cards-section>
+    <app-cards-section title="Grace split" subtitle="Click a row to focus" icon="pie-chart">
+      <div class="chart-box sm">
+        <app-chart
+          type="donut"
+          [categories]="freqLabels"
+          [series]="freqSeries"
+          [colors]="graceColors"
+          (pointClick)="onFrequencyClick($event)"
+        >
+        </app-chart>
+      </div>
+    </app-cards-section>
   </section>
 
   <section class="grid-2 section">
-    <div class="card-surface">
-      <div class="section__head"><h2><i class="bi bi-bar-chart-steps"></i> Frequency wise delay</h2></div>
-      <div class="section__body"><div id="deptFreq" class="chart-box"></div></div>
-    </div>
-    <div class="card-surface">
-      <div class="section__head"><h2><i class="bi bi-grid-3x3-gap"></i> Scheme grid</h2><span class="sub" id="schemeCount"></span></div>
-      <div class="section__body table-scroll" style="max-height:340px;overflow:auto"><div id="schemeGrid" class="rank-list"></div></div>
-    </div>
+    <app-cards-section title="Frequency wise delay" subtitle="" icon="bar-chart-steps">
+      <div class="section__body">
+        <div class="chart-box">
+          <app-chart
+            type="bar"
+            [stacked]="true"
+            [categories]="frequencydelayCategories"
+            [series]="frequencydelaySeries"
+            [colors]="frequencydelayColors"
+            (pointClick)="onFrequencyClick($event)"
+          >
+          </app-chart>
+        </div>
+      </div>
+    </app-cards-section>
+    <app-cards-section
+      title="Scheme grid"
+      subtitle="{{ schemeGrid.length }} schemes"
+      icon="grid-3x3-gap"
+    >
+      <div class="section__body table-scroll" style="max-height: 340px; overflow: auto">
+        <div id="schemeGrid" class="rank-list">
+          @for (s of schemeGrid; track $index) {
+            <div class="rank-item">
+              <span class="rank-no">{{ $index + 1 }}</span>
+              <div class="rank-main">
+                <strong>{{ escapeHtml(s.name) }}</strong
+                ><small>{{ s.delayed }} delayed of {{ s.total }}</small>
+              </div>
+              <span class="rank-val">{{ s.delayed / s.total | percent: '1.0-0' }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </app-cards-section>
   </section>
 
-  <section class="card-surface section">
-    <div class="section__head"><h2><i class="bi bi-list-ul"></i> Detailed schemes</h2></div>
-    <div class="section__body table-scroll"><table id="deptDetail" class="display nowrap" style="width:100%"></table></div>
+  <section class="section">
+    <app-cards-section title="Detailed schemes" icon="list-ul" subtitle="">
+      <app-data-table
+        [data]="tableData"
+        [columns]="tableColumns"
+        [order]="[[4, 'desc']]"
+        [pageLength]="10"
+        [Columns]="true"
+        [CSV]="true"
+        [Excel]="true"
+        [PDF]="true"
+        [Print]="true"
+      ></app-data-table>
+    </app-cards-section>
   </section>
 
   <section class="grid-2 section">
-    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-trophy"></i> Top performers</h2></div><div class="section__body"><div id="dPerf" class="rank-list"></div></div></div>
-    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-exclamation-octagon"></i> Top defaulters</h2></div><div class="section__body"><div id="dDef" class="rank-list"></div></div></div>
+    <app-cards-section title="Top performers" subtitle="Click a row to filter" icon="trophy">
+      <div class="section__body">
+        <div id="topPerformers" class="rank-list p-3">
+          @for (item of topPerformers; track $index) {
+            <div class="rank-item">
+              <span class="rank-no">{{ $index + 1 }}</span>
+              <div class="rank-main">
+                <strong>{{ escapeHtml(item.Project_Full_Name) }}</strong>
+                <small>{{ escapeHtml(subFn(item)) }}</small>
+              </div>
+              <span class="rank-val">{{ valFn(item) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </app-cards-section>
+    <app-cards-section
+      title="Top defaulters"
+      subtitle="Click a row to filter"
+      icon="exclamation-octagon"
+    >
+      <div class="section__body">
+        <div id="topDefaulters" class="rank-list">
+          @for (item of topDefaulters; track $index) {
+            <div class="rank-item">
+              <span class="rank-no">{{ $index + 1 }}</span>
+              <div class="rank-main">
+                <strong>{{ escapeHtml(item.Project_Full_Name) }}</strong>
+                <small>{{ escapeHtml(subFn(item)) }}</small>
+              </div>
+              <span class="rank-val">{{ valFn(item) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </app-cards-section>
   </section>
+
   <section class="grid-2 section">
-    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-graph-up-arrow"></i> Consecutive performers</h2></div><div class="section__body"><div id="dCPerf" class="rank-list"></div></div></div>
-    <div class="card-surface"><div class="section__head"><h2><i class="bi bi-graph-down-arrow"></i> Consecutive defaulters</h2></div><div class="section__body"><div id="dCDef" class="rank-list"></div></div></div>
+    <app-cards-section
+      title="Top 5 consecutive performers"
+      subtitle="Click a row to filter"
+      icon="graph-up-arrow"
+    >
+      <div class="section__body">
+        <div id="consecPerformers" class="rank-list">
+          @for (item of consecPerformers; track $index) {
+            <div class="rank-item">
+              <span class="rank-no">{{ $index + 1 }}</span>
+              <div class="rank-main">
+                <strong>{{ escapeHtml(item.Project_Full_Name) }}</strong>
+                <small>{{ escapeHtml(subFn(item)) }}</small>
+              </div>
+              <span class="rank-val">{{ valFn(item) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </app-cards-section>
+
+    <app-cards-section
+      title="Top 5 consecutive defaulters"
+      subtitle="Click a row to filter"
+      icon="graph-down-arrow"
+    >
+      <div class="section__body">
+        <div id="consecDefaulters" class="rank-list">
+          @for (item of consecDefaulters; track $index) {
+            <div class="rank-item">
+              <span class="rank-no">{{ $index + 1 }}</span>
+              <div class="rank-main">
+                <strong>{{ escapeHtml(item.Project_Full_Name) }}</strong>
+                <small>{{ escapeHtml(subFn(item)) }}</small>
+              </div>
+              <span class="rank-val">{{ valFn(item) }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </app-cards-section>
   </section>
 </div>
