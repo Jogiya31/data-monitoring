@@ -25,6 +25,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   type: 'bar' | 'line' | 'pie' | 'donut' | 'funnel' = 'bar';
 
   @Input() stacked = false;
+  @Input() horizontal = false;
   @Input() title = '';
   @Input() categories: string[] = [];
   @Input() series: any[] = [];
@@ -121,6 +122,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
       colors: this.colors,
       series: this.series,
       stacked: this.stacked,
+      horizontal: this.horizontal,
       height: '100%',
     };
 
