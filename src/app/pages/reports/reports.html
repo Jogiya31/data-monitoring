@@ -61,13 +61,9 @@
           <div
             class="report-item"
             *ngFor="let r of filteredReports"
-            (click)="loadReport(r); $event.stopPropagation()"
+            (click)="handleSelectedReport(r); $event.stopPropagation()"
           >
-            <input
-              type="checkbox"
-              [(ngModel)]="r.selected"
-              (change)="onSelectionChange(); $event.stopPropagation()"
-            />
+            <input type="checkbox" [(ngModel)]="r.selected" (change)="onSelectionChange()" />
 
             <span class="rname">
               <i class="bi bi-file-earmark-text"></i>
@@ -80,7 +76,7 @@
       </div>
     </aside>
     <div class="card-surface">
-      <app-cards-section title="{{selectedOption.name}}" icon="file-earmark-bar-graph">
+      <app-cards-section [title]="selectedOption?.name || 'Report Preview'" icon="file-earmark-bar-graph">
         <app-data-table
           [data]="dynamicTableData"
           [columns]="dynamicTableColumns"
