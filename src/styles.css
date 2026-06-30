@@ -1307,8 +1307,8 @@ table.dataTable {
 }
 
 table.dataTable thead th {
-  background: var(--c-surface-2);
-  color: var(--c-muted);
+  background: var(--c-surface-2) !important;
+  color: var(--c-text);
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: .03em;
@@ -1319,6 +1319,8 @@ table.dataTable thead th {
 }
 
 table.dataTable tbody td {
+  background: var(--c-surface-2) !important;
+  color: var(--c-muted);
   border-bottom: 1px solid var(--c-border) !important;
   vertical-align: middle;
 }
