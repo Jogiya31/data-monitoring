@@ -1,51 +1,122 @@
-import { AfterViewInit, Component, ElementRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, RouterLink],
   templateUrl: './header.html',
   styleUrls: ['./header.css'],
 })
 export class HeaderComponent {
 
-  constructor(private router: Router){}
+  constructor(
+    private router: Router,
+    private elementRef: ElementRef
+  ) {}
 
-  /* ---------- theme toggle (default: light, shared with dashboard) ---------- */
-   _prefs(): any {
-    let p: any = {};
-    try { p = JSON.parse(localStorage.getItem('prayas.prefs') || '{}'); } catch (e) {}
-    return Object.assign({ theme: 'light', scope: 'all', persist: true }, p);
+  isBellOpen = false;
+  isProfileOpen = false;
+
+  notifications = [
+    {
+      title: 'No new alerts',
+      time: 'Just now',
+      severity: 'low',
+    },
+  ];
+
+  toggleBell(event: MouseEvent): void {
+    event.stopPropagation();
+
+    this.isBellOpen = !this.isBellOpen;
+
+    if (this.isBellOpen) {
+      this.isProfileOpen = false;
+    }
   }
 
-   _savePrefs(patch: any) {
-    const p = Object.assign(this._prefs(), patch);
-    try { localStorage.setItem('prayas.prefs', JSON.stringify(p)); } catch (e) {}
+  toggleProfile(event: MouseEvent): void {
+    event.stopPropagation();
+
+    this.isProfileOpen = !this.isProfileOpen;
+
+    if (this.isProfileOpen) {
+      this.isBellOpen = false;
+    }
+  }
+
+  @HostListener('document:click', ['$event'])
+
+  onDocumentClick(event: Event): void {
+    if (!this.elementRef.nativeElement.contains(event.target)) {
+      this.isBellOpen = false;
+      this.isProfileOpen = false;
+    }
+  }
+
+  prefs(): any {
+    let p: any = {};
+
+    try {
+      p = JSON.parse(localStorage.getItem('prayas.prefs') || '{}');
+    } catch {}
+
+    return Object.assign(
+      {
+        theme: 'light',
+        scope: 'all',
+        persist: true,
+      },
+      p
+    );
+  }
+
+  savePrefs(patch: any): void {
+    const p = Object.assign(this.prefs(), patch);
+
+    localStorage.setItem('prayas.prefs', JSON.stringify(p));
     localStorage.setItem('prayas.theme', p.theme);
   }
 
-  toggleTheme() {
-    const cur = document.documentElement.getAttribute('data-theme');
-    const next = cur === 'dark' ? 'light' : 'dark';
+  toggleTheme(): void {
+    const current =
+      document.documentElement.getAttribute('data-theme') || 'light';
+
+    const next = current === 'dark' ? 'light' : 'dark';
+
     document.documentElement.setAttribute('data-theme', next);
-    this._savePrefs({ theme: next });
-    this._syncThemeIcon();
-    document.dispatchEvent(new CustomEvent('themechange', { detail: next }));
+
+    this.savePrefs({
+      theme: next,
+    });
+
+    document.dispatchEvent(
+      new CustomEvent('themechange', {
+        detail: next,
+      })
+    );
   }
 
-  _syncThemeIcon() {
-    const icon = document.querySelector('#btnTheme i');
-    if (icon) (icon as HTMLElement).className = document.documentElement.getAttribute('data-theme') === 'dark' ? 'bi bi-sun' : 'bi bi-moon-stars';
+  gotoHome(): void {
+    const authed = localStorage.getItem('prayas.auth') === '1';
+
+    this.router.navigateByUrl(
+      authed ? '/dashboard' : '/login'
+    );
   }
 
-  gotoHome(){
-    const authed = (() => { try { return localStorage.getItem('prayas.auth') === '1'; } catch (e) { return false; } })();
-    this.router.navigateByUrl(authed ? '/dashboard' : '/login')
-  }
-
-  referesh(){
+  referesh(): void {
     window.location.reload();
   }
 
+  logout(): void {
+    localStorage.removeItem('prayas.auth');
+    this.router.navigate(['/login']);
+  }
 }

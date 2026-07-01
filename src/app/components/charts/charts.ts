@@ -21,9 +21,7 @@ export class ChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('chartRef', { static: true })
   chartRef!: ElementRef;
 
-  @Input()
-  type: 'bar' | 'line' | 'pie' | 'donut' | 'funnel' = 'bar';
-
+  @Input() type: 'bar' | 'line' | 'pie' | 'donut' | 'funnel' = 'bar';
   @Input() stacked = false;
   @Input() horizontal = false;
   @Input() title = '';

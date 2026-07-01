@@ -1,30 +1,117 @@
 <header class="app-header">
   <div class="app-header__bar">
     <div class="app-header__left">
-      <a routerLink="/dashboard" class="brand" aria-label="PRAYAS home">
-        <span class="brand__mark">P</span>
-        <span class="brand__text">PRAYAS<small>Data Monitoring Dashboard</small></span>
+      <a routerLink="/dashboard" class="brand">
+        <span class="brand__mark"> P </span>
+
+        <span class="brand__text">
+          PRAYAS
+          <small>Data Monitoring Dashboard</small>
+        </span>
       </a>
     </div>
+
     <div class="app-header__right">
-      <button class="icon-btn" type="button" title="Home" aria-label="Home" (click)="gotoHome()">
+      <button class="icon-btn" (click)="gotoHome()">
         <i class="bi bi-house-door"></i>
       </button>
-      <button class="icon-btn" type="button" title="Refresh data" aria-label="Refresh data" (click)="referesh()">
+
+      <button class="icon-btn" (click)="referesh()">
         <i class="bi bi-arrow-clockwise"></i>
       </button>
-      <button class="icon-btn" type="button" title="Toggle theme" (click)="toggleTheme()" aria-label="Toggle light or dark theme">
-        <i class="bi bi-moon-stars"></i>
+
+      <button class="icon-btn" (click)="toggleTheme()">
+        <i class="bi" [ngClass]="prefs().theme == 'dark' ? 'bi-sun' : 'bi-moon-stars'"> </i>
       </button>
+
+      <!-- Bell -->
+
       <div class="bell">
-        <button class="icon-btn" type="button" title="Alerts" aria-label="Open alerts">
-          <i class="bi bi-bell"></i><span class="bell__badge">0</span>
+        <button id="btnBell" class="icon-btn" (click)="toggleBell($event)">
+          <i class="bi bi-bell"></i>
+
+          <span class="bell__badge" [class.hidden]="notifications.length == 0">
+            {{ notifications.length }}
+          </span>
         </button>
+
+        <div class="bell__panel" [class.show]="isBellOpen" (click)="$event.stopPropagation()">
+          <div class="bell__head">
+            <strong>Notifications</strong>
+          </div>
+
+          @if (notifications.length > 0) {
+            @for (item of notifications; track $index) {
+              <div class="bell__item">
+                <span
+                  class="dot"
+                  [ngClass]="{
+                    'sev-low': item.severity == 'low',
+                    'sev-medium': item.severity == 'medium',
+                    'sev-high': item.severity == 'high',
+                  }"
+                >
+                </span>
+
+                <div>
+                  <p>{{ item.title }}</p>
+
+                  <small>{{ item.time }}</small>
+                </div>
+              </div>
+            }
+          } @else {
+            <div class="bell__empty">No notifications</div>
+          }
+        </div>
       </div>
+
+      <!-- Profile -->
+
       <div class="profile">
-        <button class="profile__btn" type="button" aria-label="User menu">
-          <span class="avatar">MA</span><i class="bi bi-chevron-down"></i>
+        <button id="btnProfile" class="profile__btn" (click)="toggleProfile($event)">
+          <span class="avatar"> MA </span>
+
+          <i class="bi" [ngClass]="isProfileOpen ? 'bi-chevron-up' : 'bi-chevron-down'"> </i>
         </button>
+
+        <div class="profile__menu" [class.show]="isProfileOpen" (click)="$event.stopPropagation()">
+          <div class="profile__head">
+            <span class="avatar avatar--lg"> MA </span>
+
+            <div>
+              <strong> Monitoring Admin </strong>
+
+              <small> admin@prayas.gov.in </small>
+            </div>
+          </div>
+
+          <a>
+            <i class="bi bi-person"></i>
+
+            My Profile
+          </a>
+
+          <a>
+            <i class="bi bi-gear"></i>
+
+            Preferences
+          </a>
+
+          <a>
+            <i class="bi bi-bell"></i>
+
+            Notification Settings
+          </a>
+
+          <hr />
+
+          <a (click)="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+
+            Sign Out
+          </a>
+        </div>
       </div>
     </div>
   </div>
