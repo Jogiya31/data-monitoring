@@ -10,7 +10,6 @@
         </span>
       </a>
     </div>
-
     <div class="app-header__right">
       <button class="icon-btn" (click)="gotoHome()">
         <i class="bi bi-house-door"></i>
@@ -25,7 +24,6 @@
       </button>
 
       <!-- Bell -->
-
       <div class="bell">
         <button id="btnBell" class="icon-btn" (click)="toggleBell($event)">
           <i class="bi bi-bell"></i>
@@ -67,52 +65,79 @@
       </div>
 
       <!-- Profile -->
-
       <div class="profile">
         <button id="btnProfile" class="profile__btn" (click)="toggleProfile($event)">
           <span class="avatar"> MA </span>
-
           <i class="bi" [ngClass]="isProfileOpen ? 'bi-chevron-up' : 'bi-chevron-down'"> </i>
         </button>
-
         <div class="profile__menu" [class.show]="isProfileOpen" (click)="$event.stopPropagation()">
           <div class="profile__head">
             <span class="avatar avatar--lg"> MA </span>
-
             <div>
               <strong> Monitoring Admin </strong>
-
               <small> admin@prayas.gov.in </small>
             </div>
           </div>
-
-          <a>
+          <a data-bs-toggle="modal" data-bs-target="#mProfile">
             <i class="bi bi-person"></i>
-
             My Profile
           </a>
-
-          <a>
+          <a data-bs-toggle="modal" data-bs-target="#preferencesModal">
             <i class="bi bi-gear"></i>
-
             Preferences
           </a>
-
           <a>
             <i class="bi bi-bell"></i>
-
             Notification Settings
           </a>
-
           <hr />
-
-          <a (click)="logout()">
+          <a data-bs-toggle="modal" data-bs-target="#logoutModal">
             <i class="bi bi-box-arrow-right"></i>
-
             Sign Out
           </a>
         </div>
       </div>
+
     </div>
   </div>
 </header>
+
+<app-popup
+  modalId="mProfile"
+  title="My Profile"
+  icon="bi bi-person"
+  saveText="Update"
+  closeText="Close"
+>
+  <div style="display: flex; gap: 14px; align-items: center; margin-bottom: 14px">
+    <span class="avatar avatar--lg" style="width: 54px; height: 54px; font-size: 18px">MA</span>
+    <div>
+      <strong style="font-size: 16px">Monitoring Admin</strong>
+      <div style="color: var(--c-muted); font-size: 13px">admin@prayas.gov.in</div>
+    </div>
+  </div>
+  <div class="prof-row">
+    <span class="k">Role</span><span class="v">Dashboard Administrator</span>
+  </div>
+  <div class="prof-row">
+    <span class="k">Access scope</span><span class="v">All ministries &amp; states</span>
+  </div>
+  <div class="prof-row">
+    <span class="k">Department</span><span class="v">Programme Monitoring Unit</span>
+  </div>
+  <div class="prof-row"><span class="k">Last sign-in</span><span class="v"></span></div>
+  <div class="prof-row">
+    <span class="k">Session</span><span class="v">Active · this device</span>
+  </div>
+</app-popup>
+
+<app-popup
+  modalId="deleteModal"
+  title="Delete User"
+  icon="bi bi-trash"
+  headerClass="bg-danger"
+  saveText="Delete"
+  closeText="Cancel"
+>
+  <p>Are you sure you want to delete this user?</p>
+</app-popup>

@@ -1,0 +1,58 @@
+<div
+  class="modal fade"
+  [id]="modalId"
+  tabindex="-1"
+  [attr.data-bs-backdrop]="backdrop"
+  [attr.data-bs-keyboard]="keyboard"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" [ngClass]="dialogClasses">
+    <div class="modal-content">
+      <!-- Header -->
+
+      <div *ngIf="showHeader" class="modal-header" [ngClass]="headerClass">
+        <h5 class="modal-title">
+          <i *ngIf="icon" [class]="icon" class="me-2"></i>
+
+          {{ title }}
+        </h5>
+
+        <button class="btn-close" data-bs-dismiss="modal" (click)="onClose()"></button>
+      </div>
+
+      <!-- Body -->
+
+      <div class="modal-body" [ngClass]="bodyClass">
+        <ng-content></ng-content>
+      </div>
+
+      <!-- Footer -->
+
+      <div *ngIf="showFooter" class="modal-footer" [ngClass]="footerClass">
+        <button
+          *ngIf="showCloseButton"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          (click)="onClose()"
+        >
+          <i [class]="closeIcon" class="me-1"></i>
+
+          {{ closeText }}
+        </button>
+
+        <button
+          *ngIf="showSaveButton"
+          class="btn btn-primary"
+          [disabled]="loading"
+          (click)="onSave()"
+        >
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+
+          <i *ngIf="!loading" [class]="saveIcon" class="me-1"></i>
+
+          {{ saveText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

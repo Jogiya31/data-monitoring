@@ -5,11 +5,12 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { PopupComponent } from "../../popup/popup";
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, PopupComponent],
   templateUrl: './header.html',
   styleUrls: ['./header.css'],
 })
