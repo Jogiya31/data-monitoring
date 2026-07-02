@@ -1,58 +1,75 @@
 <div
-  class="modal fade"
+  class="modal fade cust-modal"
   [id]="modalId"
   tabindex="-1"
   [attr.data-bs-backdrop]="backdrop"
   [attr.data-bs-keyboard]="keyboard"
   aria-hidden="true"
 >
-  <div class="modal-dialog" [ngClass]="dialogClasses">
+  <div class="modal-dialog cust-modal-container " [ngClass]="dialogClasses">
     <div class="modal-content">
-      <!-- Header -->
+      @if (showHeader) {
+        <div class="modal-header justify-content-between" [ngClass]="headerClass">
+          <h5 class="modal-title d-flex align-items-center gap-2">
+            @if (icon) {
+              <i class="bi" [ngClass]="[icon, iconColor]"></i>
+            }
+            {{ title }}
+          </h5>
 
-      <div *ngIf="showHeader" class="modal-header" [ngClass]="headerClass">
-        <h5 class="modal-title">
-          <i *ngIf="icon" [class]="icon" class="me-2"></i>
-
-          {{ title }}
-        </h5>
-
-        <button class="btn-close" data-bs-dismiss="modal" (click)="onClose()"></button>
-      </div>
-
-      <!-- Body -->
+          <button
+            type="button"
+            class="btn cust-modal-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="onAction('close')"
+          >
+          <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      }
 
       <div class="modal-body" [ngClass]="bodyClass">
         <ng-content></ng-content>
       </div>
 
-      <!-- Footer -->
+      @if (showFooter) {
+        <div class="modal-footer" [ngClass]="footerClass">
+          @if (showCloseButton) {
+            <button
+              type="button"
+              class="btn"
+              [ngClass]="'btn-' + closeButtonClass"
+              data-bs-dismiss="modal"
+              (click)="onAction('close')"
+            >
+              @if (closeIcon) {
+                <i class="bi " [ngClass]="closeIcon"></i>
+              }
+              {{ closeText }}
+            </button>
+          }
 
-      <div *ngIf="showFooter" class="modal-footer" [ngClass]="footerClass">
-        <button
-          *ngIf="showCloseButton"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-          (click)="onClose()"
-        >
-          <i [class]="closeIcon" class="me-1"></i>
+          @if (showSaveButton) {
+            <button
+              type="button"
+              class="btn"
+              [ngClass]="'btn-' + saveButtonClass"
+              [disabled]="loading"
+              data-bs-dismiss="modal"
+              (click)="onAction('save')"
+            >
+              @if (loading) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+              } @else if (saveIcon) {
+                <i class="bi " [ngClass]="saveIcon"></i>
+              }
 
-          {{ closeText }}
-        </button>
-
-        <button
-          *ngIf="showSaveButton"
-          class="btn btn-primary"
-          [disabled]="loading"
-          (click)="onSave()"
-        >
-          <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-
-          <i *ngIf="!loading" [class]="saveIcon" class="me-1"></i>
-
-          {{ saveText }}
-        </button>
-      </div>
+              {{ saveText }}
+            </button>
+          }
+        </div>
+      }
     </div>
   </div>
 </div>

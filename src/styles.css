@@ -1623,38 +1623,31 @@ table.dataTable.table-sm tbody tr {
 }
 
 /* ---- modal --------------------------------------------------------------- */
-.modal-host {
-  position: fixed;
-  inset: 0;
-  z-index: 2200;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 18px;
-}
-
-.modal-host.show {
-  display: flex;
-}
-
-.modal-host__backdrop {
-  position: absolute;
-  inset: 0;
+.cust-modal {
   background: rgba(9, 30, 66, .55);
   backdrop-filter: blur(2px);
 }
 
-.modal-card {
-  position: relative;
+.cust-modal .modal-content {
   background: var(--c-surface);
-  border: 1px solid var(--c-border);
+  color: var(--c-text);
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
-  width: 100%;
-  max-width: 460px;
-  max-height: 88vh;
-  overflow-y: auto;
-  animation: modalIn .2s ease;
+  animation: modalIn .18s ease-out;
+}
+
+.cust-modal .modal-header {
+  border-bottom: 1px solid var(--c-border);
+  padding: 14px 18px;
+}
+
+button.btn.cust-modal-close {
+    color: var(--c-text);
+}
+
+.cust-modal .modal-footer {
+  border-top: 1px solid var(--c-border);
+  padding: 14px 18px;
 }
 
 @keyframes modalIn {
@@ -1662,50 +1655,6 @@ table.dataTable.table-sm tbody tr {
     transform: translateY(12px);
     opacity: 0;
   }
-}
-
-.modal-card__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 18px;
-  border-bottom: 1px solid var(--c-border);
-}
-
-.modal-card__head h3 {
-  font-size: 16px;
-  display: flex;
-  align-items: center;
-  gap: 9px;
-}
-
-.modal-card__head h3 i {
-  color: var(--c-primary);
-}
-
-.modal-card__body {
-  padding: 18px;
-}
-
-.modal-card__foot {
-  padding: 14px 18px;
-  border-top: 1px solid var(--c-border);
-  display: flex;
-  justify-content: flex-end;
-  gap: 9px;
-}
-
-.modal-close {
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: var(--c-faint);
-  cursor: pointer;
-  line-height: 1;
-}
-
-.modal-close:hover {
-  color: var(--c-text);
 }
 
 .prof-row {
@@ -1764,7 +1713,7 @@ table.dataTable.table-sm tbody tr {
 .btn-primary-solid {
   background: var(--c-primary);
   border: 1px solid var(--c-primary);
-  color: #fff;
+  color: #fff !important;
   border-radius: 9px;
   padding: 7px 14px;
   font-size: 13px;
